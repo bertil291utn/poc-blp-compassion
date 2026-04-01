@@ -94,7 +94,7 @@ export default function LetterDetailPage() {
             className="w-full bg-compassion-blue text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-compassion-blue-dark transition-colors"
           >
             <PenLine size={18} />
-            Responder a esta carta
+            Responder a Jessica
           </button>
         )}
       </div>

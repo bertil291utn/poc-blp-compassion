@@ -14,7 +14,7 @@ function SuccessScreen() {
       </div>
       <h2 className="text-2xl font-bold text-gray-900 mb-2">¡Carta enviada!</h2>
       <p className="text-gray-500 text-sm mb-8">
-        Tu carta para María Alejandra ha sido enviada exitosamente y está siendo procesada por el equipo de Compassion.
+        Tu carta para Jessica ha sido enviada exitosamente y está siendo procesada por el equipo de Compassion.
       </p>
       <button
         onClick={() => { resetCompose(); navigate('/letters'); }}
@@ -61,7 +61,7 @@ export default function Step4Send() {
             <span className="text-xl">{selectedFormat?.emoji ?? '📄'}</span>
             <span className="text-sm font-semibold text-gray-700">{selectedFormat?.name ?? 'Sin formato'}</span>
           </div>
-          <p className="text-xs text-gray-500 mb-2">Para: María Alejandra</p>
+          <p className="text-xs text-gray-500 mb-2">Para: Jessica (mi patrocinadora)</p>
           <p className="text-sm text-gray-800 leading-relaxed line-clamp-4 whitespace-pre-line">
             {text || '(Sin texto)'}
           </p>

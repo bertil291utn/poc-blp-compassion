@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 import clsx from 'clsx';
-import { letters as initialLetters } from '../../data/mockData';
+import { letters as initialLetters, pendingActions as initialPending } from '../../data/mockData';
 import LetterCard from '../../components/letters/LetterCard';
+import PendingLetterNotification from '../../components/letters/PendingLetterNotification';
 
 const filters = [
   { key: 'all', label: 'Todas' },
@@ -13,6 +14,7 @@ const filters = [
 
 export default function LettersPage() {
   const [letters, setLetters] = useState(initialLetters);
+  const [pending, setPending] = useState(initialPending);
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
 
@@ -27,6 +29,10 @@ export default function LettersPage() {
 
   function handleDelete(id) {
     setLetters(prev => prev.filter(l => l.id !== id));
+  }
+
+  function handleDismissPending(id) {
+    setPending(prev => prev.filter(p => p.id !== id));
   }
 
   return (
@@ -78,8 +84,24 @@ export default function LettersPage() {
         </div>
       </div>
 
+      {/* Pending notifications */}
+      {pending.length > 0 && (
+        <div className="px-4 pb-1 space-y-2">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-1">
+            Pendiente{pending.length > 1 ? 's' : ''}
+          </p>
+          {pending.map(action => (
+            <PendingLetterNotification
+              key={action.id}
+              action={action}
+              onDismiss={handleDismissPending}
+            />
+          ))}
+        </div>
+      )}
+
       {/* List */}
-      <div className="px-4 pb-4 space-y-3 mt-2">
+      <div className="px-4 pb-4 space-y-3 mt-3">
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
             <p className="text-sm">No hay cartas{search ? ' que coincidan' : ''}</p>

@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         compassion: {
-          blue: '#0077C8',
-          'blue-light': '#E3F2FD',
-          'blue-dark': '#005A96',
+          blue: '#1f5eb8',
+          'blue-light': '#EBF2FB',
+          'blue-dark': '#174a96',
         },
         letter: {
-          received: '#0077C8',
+          received: '#1f5eb8',
           draft: '#9E9E9E',
           sent: '#2E7D32',
         }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Inbox, Mail, FileEdit, Send, Image, MoreVertical, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
 import LetterStatusBadge from './LetterStatusBadge';
+import CommTypeBadge from './CommTypeBadge';
 import DeleteModal from './DeleteModal';
 
 function StatusIcon({ status, isUnread }) {
@@ -84,8 +85,9 @@ export default function LetterCard({ letter, onDelete }) {
             {letter.preview}
           </p>
 
-          <div className="flex items-center gap-2 mt-2">
+          <div className="flex items-center gap-2 mt-2 flex-wrap">
             <LetterStatusBadge status={letter.status} />
+            {letter.commType && <CommTypeBadge type={letter.commType} />}
             {letter.hasPhotos && (
               <span className="flex items-center gap-1 text-xs text-gray-400">
                 <Image size={12} />
