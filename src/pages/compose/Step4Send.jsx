@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Send, CheckCircle, Image } from 'lucide-react';
+import { CheckCircle, Image } from 'lucide-react';
 import { useCompose } from '../../context/ComposeContext';
 
 function SuccessScreen() {
@@ -27,19 +26,9 @@ function SuccessScreen() {
 }
 
 export default function Step4Send() {
-  const { selectedFormat, text, photos, wordCount } = useCompose();
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const { selectedFormat, text, photos, wordCount, isSent } = useCompose();
 
-  function handleSend() {
-    setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      setSent(true);
-    }, 1500);
-  }
-
-  if (sent) return <SuccessScreen />;
+  if (isSent) return <SuccessScreen />;
 
   return (
     <div>
@@ -90,27 +79,8 @@ export default function Step4Send() {
           </div>
         )}
 
-        {/* Send button */}
-        <button
-          onClick={handleSend}
-          disabled={sending}
-          className="w-full bg-compassion-blue text-white font-semibold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-compassion-blue-dark transition-colors disabled:opacity-70"
-        >
-          {sending ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              Enviando...
-            </>
-          ) : (
-            <>
-              <Send size={18} />
-              Enviar carta
-            </>
-          )}
-        </button>
-
         <p className="text-xs text-gray-400 text-center">
-          Una vez enviada, la carta será revisada por el equipo de Compassion antes de llegar a María Alejandra.
+          Una vez enviada, la carta será revisada por el equipo de Compassion antes de llegar a Jessica.
         </p>
       </div>
     </div>

@@ -7,13 +7,25 @@ export function ComposeProvider({ children }) {
   const [selectedFormat, setSelectedFormat] = useState(null);
   const [text, setText] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [isSent, setIsSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const minWords = 50;
+
+  function handleSend() {
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setIsSent(true);
+    }, 1500);
+  }
 
   function resetCompose() {
     setCurrentStep(1);
     setSelectedFormat(null);
     setText('');
     setPhotos([]);
+    setIsSent(false);
+    setSending(false);
   }
 
   function wordCount() {
@@ -26,6 +38,8 @@ export function ComposeProvider({ children }) {
       selectedFormat, setSelectedFormat,
       text, setText,
       photos, setPhotos,
+      isSent, setIsSent,
+      sending, handleSend,
       minWords,
       wordCount,
       resetCompose,
