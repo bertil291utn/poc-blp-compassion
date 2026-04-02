@@ -1,4 +1,4 @@
-import { ArrowLeftRight, Circle, CircleDot, CalendarCheck, MailX } from 'lucide-react';
+import { ArrowLeftRight, Circle, CircleDot, CalendarCheck, MailX, Sparkles, PenLine } from 'lucide-react';
 import clsx from 'clsx';
 
 export const COMM_TYPE_CONFIG = {
@@ -26,6 +26,16 @@ export const COMM_TYPE_CONFIG = {
     label: 'Salida',
     Icon: MailX,
     classes: 'bg-gray-100 text-gray-600',
+  },
+  'nueva-patrocinadora': {
+    label: 'Nueva patrocinadora',
+    Icon: Sparkles,
+    classes: 'bg-rose-50 text-rose-700',
+  },
+  'iniciativa-propia': {
+    label: 'Por iniciativa propia',
+    Icon: PenLine,
+    classes: 'bg-indigo-50 text-indigo-700',
   },
 };
 

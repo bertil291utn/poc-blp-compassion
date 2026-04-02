@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Send, Inbox, PenLine, Calendar, Hash, MapPin } from 'lucide-react';
+import { Send, Inbox, PenLine, Calendar, MapPin, Mail } from 'lucide-react';
 import { userProfile } from '../../data/mockData';
 import StatCard from '../../components/account/StatCard';
 import SponsorCard from '../../components/account/SponsoredChildCard';
@@ -8,70 +8,69 @@ export default function AccountPage() {
   const navigate = useNavigate();
   const { beneficiary, sponsor, stats } = userProfile;
 
-  function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString('es-ES', {
-      day: '2-digit', month: 'long', year: 'numeric',
-    });
-  }
+  const sinceYear = new Date(beneficiary.memberSince).getFullYear();
+  const yearsInProgram = new Date().getFullYear() - sinceYear;
 
   return (
     <div className="max-w-lg mx-auto p-4 space-y-4">
-      {/* Profile header — the logged-in user (apadrinado) */}
+
+      {/* Profile — beneficiary */}
       <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
         <div className="w-16 h-16 rounded-full bg-compassion-blue flex items-center justify-center flex-shrink-0">
           <span className="text-white font-bold text-xl">{beneficiary.initials}</span>
         </div>
-        <div>
-          <h1 className="font-bold text-gray-900 text-lg leading-tight">{beneficiary.name}</h1>
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <MapPin size={12} className="text-gray-400" />
-            <span className="text-sm text-gray-500">{beneficiary.country} · {beneficiary.program}</span>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <h1 className="font-bold text-gray-900 text-lg leading-tight">{beneficiary.name}</h1>
+            <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Activo</span>
           </div>
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <Hash size={12} className="text-gray-400" />
-            <span className="text-xs text-gray-400">ID: {beneficiary.childId}</span>
+          <div className="flex items-center gap-1.5 mt-1">
+            <MapPin size={12} className="text-gray-400" />
+            <span className="text-sm text-gray-500">{beneficiary.country} · {beneficiary.age} años</span>
           </div>
           <div className="flex items-center gap-1.5 mt-0.5">
             <Calendar size={12} className="text-gray-400" />
             <span className="text-xs text-gray-400">
-              En el programa desde {formatDate(beneficiary.memberSince)}
+              {yearsInProgram} año{yearsInProgram !== 1 ? 's' : ''} en el programa
             </span>
           </div>
         </div>
       </div>
 
-      {/* Stats */}
+      {/* Letter stats */}
       <div>
         <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-1">
-          Mis cartas
+          Cartas ({stats.total} en total)
         </h2>
         <div className="grid grid-cols-2 gap-3">
           <StatCard
             value={stats.lettersSent}
-            label="Cartas enviadas"
+            label="Enviadas"
             icon={Send}
             color="#2E7D32"
           />
           <StatCard
             value={stats.lettersReceived}
-            label="Cartas recibidas"
+            label="Recibidas"
             icon={Inbox}
             color="#1f5eb8"
           />
         </div>
         <div className="mt-2 bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100 flex items-center gap-2">
-          <Calendar size={14} className="text-gray-400" />
+          <Mail size={14} className="text-gray-400" />
           <span className="text-sm text-gray-600">
-            Última carta recibida:{' '}
-            <span className="font-medium">{formatDate(stats.lastLetterDate)}</span>
+            Última de Jessica:{' '}
+            <span className="font-medium">
+              {new Date(stats.lastLetterDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'long' })}
+            </span>
           </span>
         </div>
       </div>
 
-      {/* Sponsor info */}
+      {/* Sponsor */}
       <SponsorCard sponsor={sponsor} />
 
-      {/* Quick action */}
+      {/* CTA */}
       <button
         onClick={() => navigate('/compose')}
         className="w-full bg-compassion-blue text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 hover:bg-compassion-blue-dark transition-colors"

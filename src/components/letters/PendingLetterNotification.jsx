@@ -36,11 +36,6 @@ export default function PendingLetterNotification({ action, onDismiss }) {
       'rounded-xl border px-4 py-3 flex gap-3 items-start',
       TYPE_BORDER[action.commType] ?? 'border-gray-200 bg-gray-50'
     )}>
-      {cfg && (
-        <div className="mt-0.5 flex-shrink-0">
-          <cfg.Icon size={18} strokeWidth={2} className="opacity-70" />
-        </div>
-      )}
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
