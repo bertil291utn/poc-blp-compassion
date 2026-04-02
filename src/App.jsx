@@ -4,6 +4,7 @@ import LettersPage from './pages/letters/LettersPage';
 import LetterDetailPage from './pages/letters/LetterDetailPage';
 import ComposePage from './pages/compose/ComposePage';
 import AccountPage from './pages/account/AccountPage';
+import { Analytics } from "@vercel/analytics/react"
 
 const router = createBrowserRouter([
   {
@@ -20,5 +21,8 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return <>
+  <RouterProvider router={router} />
+  <Analytics/>
+  </>
 }
